@@ -17,7 +17,7 @@ var (
 	Database = ""
 )
 
-func openConnection() (*sql.DB, errors) {
+func openConnection() (*sql.DB, error) {
 	conn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", Hostname, Port, Username, Password, Database)
 	db, err := sql.Open("postgres", conn)
 	if err != nil {
@@ -54,10 +54,10 @@ func exists(username string) int {
 }
 
 func AddUser(d Userdata) int {
-	d.Username = string.ToLower(d.Username)
+	d.Username = strings.ToLower(d.Username)
 
 	db, err := openConnection()
-	if err != nill {
+	if err != nil {
 		fmt.Println(err)
 		return -1
 	}
@@ -71,7 +71,7 @@ func AddUser(d Userdata) int {
 	insertStatement := `insert nto "users" ("username") values ($1)`
 
 	_, err = db.Exec(insertStatement, d.Username)
-	if err != nill {
+	if err != nil {
 		fmt.Println(err)
 		return -1
 	}
@@ -84,7 +84,7 @@ func AddUser(d Userdata) int {
 	insertStatement = `insert into "userdata" ("userID", "name", "surname", "description") values ($1,$2,$3,$4)`
 
 	_, err = db.Exec(insertStatement, userID, d.Name, d.Surname, d.Description)
-	if err != nill {
+	if err != nil {
 		fmt.Println("db.Exec()", err)
 		return 1
 	}
