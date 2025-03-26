@@ -9,6 +9,14 @@ import (
 	_ "github.com/lib/pq"
 )
 
+type Userdata struct {
+	ID          int
+	Username    string
+	Name        string
+	Surname     string
+	Description string
+}
+
 var (
 	Hostname = ""
 	Port     = 2345
