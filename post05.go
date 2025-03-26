@@ -76,7 +76,7 @@ func AddUser(d Userdata) int {
 		return -1
 	}
 
-	insertStatement := `insert nto "users" ("username") values ($1)`
+	insertStatement := `insert into "users" ("username") values ($1)`
 
 	_, err = db.Exec(insertStatement, d.Username)
 	if err != nil {
